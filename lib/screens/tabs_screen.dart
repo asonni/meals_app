@@ -5,7 +5,7 @@ import 'package:meals/screens/favorites_screen.dart';
 import 'package:meals/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
-  static const routeName = '/tabs';
+  static const routeName = '/';
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
