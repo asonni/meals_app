@@ -4,15 +4,32 @@ import 'package:meals/widgets/main_drawer.dart';
 class FiltersScreen extends StatefulWidget {
   static const routeName = "/filters";
 
+  final Map<String, bool> currentFilters;
+  final Function saveFilters;
+
+  FiltersScreen(
+    this.currentFilters,
+    this.saveFilters,
+  );
+
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
   var _glutenFree = false;
-  var _vegetatin = false;
-  var _vegan = false;
   var _lactoseFree = false;
+  var _vegetarian = false;
+  var _vegan = false;
+
+  @override
+  initState() {
+    _glutenFree = widget.currentFilters['gluten'];
+    _lactoseFree = widget.currentFilters['lactose'];
+    _vegetarian = widget.currentFilters['vegetarian'];
+    _vegan = widget.currentFilters['vegan'];
+    super.initState();
+  }
 
   Widget _buildSwitchListTile(
     String title,
@@ -35,6 +52,22 @@ class _FiltersScreenState extends State<FiltersScreen> {
           title: Text(
             'Your Filters',
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.save,
+              ),
+              onPressed: () {
+                final Map<String, bool> selectedFilters = {
+                  'gluten': _glutenFree,
+                  'lactose': _lactoseFree,
+                  'vegan': _vegan,
+                  'vegetarian': _vegetarian,
+                };
+                widget.saveFilters(selectedFilters);
+              },
+            ),
+          ],
         ),
         drawer: MainDrawer(),
         body: Column(
@@ -70,12 +103,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     },
                   ),
                   _buildSwitchListTile(
-                    'Vegetatin',
-                    'Only inlude vegetatin meals',
-                    _vegetatin,
+                    'Vegetarian',
+                    'Only inlude vegetarian meals',
+                    _vegetarian,
                     (newValue) {
                       setState(() {
-                        _vegetatin = newValue;
+                        _vegetarian = newValue;
                       });
                     },
                   ),
