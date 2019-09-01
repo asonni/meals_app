@@ -8,7 +8,10 @@ class MealDetailScreen extends StatelessWidget {
   final Function toggleFavorite;
   final Function isFavorite;
 
-  MealDetailScreen(this.toggleFavorite, this.isFavorite);
+  MealDetailScreen(
+    this.toggleFavorite,
+    this.isFavorite,
+  );
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -60,7 +63,7 @@ class MealDetailScreen extends StatelessWidget {
                 itemBuilder: (ctx, index) => Card(
                   color: Theme.of(context).accentColor,
                   child: Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 5,
                         horizontal: 10,
                       ),
