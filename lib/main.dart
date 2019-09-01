@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:meals/dummy_data.dart';
 import 'package:meals/screens/categories_screen.dart';
 import 'package:meals/screens/category_meals_screen.dart';
 import 'package:meals/screens/filters_screen.dart';
 import 'package:meals/screens/meal_detail_screen.dart';
 import 'package:meals/screens/tabs_screen.dart';
+import 'package:meals/dummy_data.dart';
 import 'package:meals/models/meal.dart';
 
 void main() => runApp(MyApp());
@@ -31,18 +31,10 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _filters = filterData;
       _availableMeals = DUMMY_MEALS.where((meal) {
-        if (_filters['gluten'] && !meal.isGlutenFree) {
-          return false;
-        }
-        if (_filters['lactose'] && !meal.isLactoseFree) {
-          return false;
-        }
-        if (_filters['vegan'] && !meal.isVegan) {
-          return false;
-        }
-        if (_filters['vegetarian'] && !meal.isVegetarian) {
-          return false;
-        }
+        if (_filters['gluten'] && !meal.isGlutenFree) return false;
+        if (_filters['lactose'] && !meal.isLactoseFree) return false;
+        if (_filters['vegan'] && !meal.isVegan) return false;
+        if (_filters['vegetarian'] && !meal.isVegetarian) return false;
         return true;
       }).toList();
     });
